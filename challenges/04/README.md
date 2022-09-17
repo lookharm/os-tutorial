@@ -1,6 +1,6 @@
 # 04
 
-Write a boot sector program that prints the charecters "ABCD" within the stack in normal order ("ABCD") and reverse order("DCBA").
+Write a boot sector program that prints the characters "ABCD" within the stack in normal order ("ABCD") and reverse order("DCBA").
 [solution](./stack.asm)
 ```asm
 mov ah, 0x0e
