@@ -1,7 +1,7 @@
 # 07
 
 1. Write a boot sector program that reads the first byte of the 2nd sector on the disk, and also checks error from the disk and sectors reading.
-[solution](./segmentation_1.asm)
+[solution](./disk.asm)
 ```asm
 [org 0x7c00]
     ; code here...
