@@ -49,3 +49,5 @@ HELLO: db 'HELLO', 0
 times 510-($-$$) db 0x00
 dw 0xaa55
 ```
+
+hint: [Calling Convention](https://www.cs.virginia.edu/~evans/cs216/guides/x86.html)
