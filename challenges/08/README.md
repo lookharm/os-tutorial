@@ -14,3 +14,41 @@
         - 2 nd flags : ( granularity )1 (32 - bit default )1 (64 - bit seg )0 ( AVL )0 -> 1100 b
 
     - hint: [Writing a Simple Operating System — from Scratch](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf#page=38&zoom=100,141,774)
+
+3. Write a simple Global Descriptor Table. [solution](./gdt.asm)
+    - GDT size: 16 bits
+    - GDT address: 32 bits
+    - Use the following template:
+        ```asm
+        gdt_start:
+
+        gdt_null:
+            dd 0x0
+            dd 0x0
+
+        gdt_code:
+            dw 0xffff
+            dw 0x0
+            db 0x0
+            db 10011010b
+            db 11001111b
+            db 0x0
+
+        gdt_data:
+            dw 0xffff
+            dw 0x0
+            db 0x0
+            db 10010010b
+            db 11001111b
+            db 0x0
+            
+        gdt_end:
+
+        gdt_descriptor:
+            ; code here...
+
+            ;;;;;;;;;;;;;;
+
+        CODE_SEG equ gdt_code - gdt_start
+        DATA_SEG equ gdt_data - gdt_start
+        ```
