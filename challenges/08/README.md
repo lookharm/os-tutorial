@@ -1,5 +1,25 @@
 # 08
 
+1. Write simple instructions that print string in 32-bit protected mode. 
+[solution](./print_pm.asm)
+    ```asm
+    [bits 32]
+    VIDEO_MEMORY equ 0xb8000
+    WHITE_ON_BLACK equ 0x0f
+
+    print_string_pm:
+        ; code here...
+        ;;;;;;;;;;;;;;
+
+    print_string_pm_loop:
+        ; code here...
+        ;;;;;;;;;;;;;;
+
+    print_string_pm_done:
+        ; code here...
+        ;;;;;;;;;;;;;;
+    ```
+
 2. Write simple segment descriptors: null descriptor, code descriptor, and data descriptor.
     - null descriptor: 8 zero bytes. [solution](./gdt_null.asm)
     - code descriptor: [solution](./gdt_code.asm)
@@ -52,3 +72,39 @@
         CODE_SEG equ gdt_code - gdt_start
         DATA_SEG equ gdt_data - gdt_start
         ```
+
+4. Write a simple instructions that switch from 16-bit real mode to 32-bit protected mode by follwing these steps: [solution](./switch.asm)
+    1. Disable interrupts
+    2. Load our GDT
+    3. Set a bit on the CPU control register cr0
+    4. Flush the CPU pipeline by issuing a carefully crafted far jump
+    5. Update all the segment registers
+    6. Update the stack
+    7. Call to a well-known label which contains the first useful code in 32 bits
+    
+    ```asm
+    [bits 16]
+    switch_to_pm:
+        ; code here...
+        ;1
+        ;2
+        ;3
+        ;;;;;;;;;;;;;;
+        
+        jmp CODE_SEG:start_pm ;4
+
+    [bits 32]
+    start_pm:
+        ; code here...
+        mov ax, DATA_SEG ;5
+        mov ds, ax
+        ; ss
+        ; ...
+
+        ;6
+
+        ;;;;;;;;;;;;;;
+
+
+        call BEGIN_PM ;7
+    ```
